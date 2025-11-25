@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Use 127.0.0.1 instead of localhost to force IPv4
 const PREDICT_SERVICE =
-  process.env.PREDICT_SERVICE_URL || "http://127.0.0.1:8501";
+  process.env.PREDICT_SERVICE_URL;
 
 router.post("/analyze", auth, async (req, res) => {
   try {
