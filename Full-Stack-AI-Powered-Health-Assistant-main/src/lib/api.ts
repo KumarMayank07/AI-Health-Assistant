@@ -339,7 +339,7 @@ class ApiService {
   }
 
   async ragGetChats() {
-    const ragUrl = RAG_API_BASE_URL";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(`${ragUrl}/chats`, {
       headers: {
         Authorization: `Bearer ${
