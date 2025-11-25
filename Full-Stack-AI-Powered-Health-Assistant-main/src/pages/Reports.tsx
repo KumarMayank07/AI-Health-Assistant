@@ -119,7 +119,7 @@ export default function Reports() {
       }
 
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/reports`,
+        `${import.meta.env.VITE_API_BASE_URL}/reports`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -169,7 +169,7 @@ export default function Reports() {
       console.log("Uploading to Cloudinary...");
 
       const uploadRes = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/upload/image`,
+        `${import.meta.env.VITE_API_BASE_URL}/upload/image`,
         {
           method: "POST",
           headers: {
@@ -202,7 +202,7 @@ export default function Reports() {
       console.log("Starting analysis...");
 
       const analyzeRes = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/reports/analyze`,
+        `${import.meta.env.VITE_API_BASE_URL}/reports/analyze`,
         {
           method: "POST",
           headers: {

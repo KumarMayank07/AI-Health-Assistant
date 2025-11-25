@@ -40,7 +40,7 @@ export default function UserDashboard() {
   const fetchReports = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/reports`,
+        `${import.meta.env.VITE_API_BASE_URL}/reports`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
