@@ -256,7 +256,7 @@ class ApiService {
     const formData = new FormData();
     formData.append("image", file);
 
-    const url = `${this.baseURL}/upload/image`;
+    const url = `${API_BASE_URL}/upload/image`;
     const response = await fetch(url, {
       method: "POST",
       headers: { Authorization: `Bearer ${this.token || ""}` },
@@ -276,7 +276,7 @@ class ApiService {
     const formData = new FormData();
     formData.append("image", file);
 
-    const url = `${this.baseURL}/upload/profile-image`;
+    const url = `${API_BASE_URL}/upload/profile-image`;
     const response = await fetch(url, {
       method: "POST",
       headers: { Authorization: `Bearer ${this.token || ""}` },
