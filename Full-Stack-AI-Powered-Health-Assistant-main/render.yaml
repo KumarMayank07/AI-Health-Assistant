@@ -6,6 +6,7 @@ services:
     name: health-assistant-backend
     runtime: node
     region: ohio
+    rootDir: ./Full-Stack-AI-Powered-Health-Assistant-main/backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
@@ -32,6 +33,7 @@ services:
     name: health-assistant-rag
     runtime: docker
     region: ohio
+    rootDir: ./Full-Stack-AI-Powered-Health-Assistant-main
     dockerfilePath: ./backend/Dockerfile.rag
     envVars:
       - key: NODE_ENV
@@ -51,6 +53,7 @@ services:
     name: health-assistant-predict
     runtime: docker
     region: ohio
+    rootDir: ./Full-Stack-AI-Powered-Health-Assistant-main
     dockerfilePath: ./backend/Dockerfile.predict
     envVars:
       - key: NODE_ENV
