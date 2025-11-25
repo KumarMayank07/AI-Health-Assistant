@@ -1,5 +1,6 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const RAG_API_BASE_URL = import.meta.env.VITE_RAG_API_BASE_URL;
+const PREDICT_API_URL = import.meta.env.VITE_PREDICT_API_URL;
 
 class ApiService {
   private baseURL: string;
@@ -314,8 +315,7 @@ class ApiService {
   // RAG Chat methods
 
   async ragSendMessage(message: string, chatId?: string) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const response = await fetch(`${ragUrl}/chat`, {
@@ -339,8 +339,7 @@ class ApiService {
   }
 
   async ragGetChats() {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(`${ragUrl}/chats`, {
       headers: {
         Authorization: `Bearer ${
@@ -354,8 +353,7 @@ class ApiService {
   }
 
   async ragGetMessages(chatId: string) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(`${ragUrl}/chats/${chatId}/messages`, {
       headers: {
         Authorization: `Bearer ${
@@ -372,8 +370,7 @@ class ApiService {
   // --- Added rag chat helpers ---
 
   async ragDeleteChat(chatId: string) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -392,8 +389,7 @@ class ApiService {
   }
 
   async ragRenameChat(chatId: string, newTitle: string) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -413,8 +409,7 @@ class ApiService {
   }
 
   async ragArchiveChat(chatId: string, archived = true) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -435,8 +430,7 @@ class ApiService {
   }
 
   async ragShareChat(chatId: string) {
-    const ragUrl =
-      import.meta.env.VITE_RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}/share`,
       {
