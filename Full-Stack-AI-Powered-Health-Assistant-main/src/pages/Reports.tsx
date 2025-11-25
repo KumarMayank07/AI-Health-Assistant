@@ -118,11 +118,14 @@ export default function Reports() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/reports", {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/reports`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
 
       if (res.ok) {
         const data = await res.json();
@@ -165,13 +168,16 @@ export default function Reports() {
 
       console.log("Uploading to Cloudinary...");
 
-      const uploadRes = await fetch("http://localhost:5000/api/upload/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-        body: formData,
-      });
+      const uploadRes = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/upload/image`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: formData,
+        }
+      );
 
       if (!uploadRes.ok) {
         const errorData = await uploadRes.json().catch(() => ({}));
@@ -196,7 +202,7 @@ export default function Reports() {
       console.log("Starting analysis...");
 
       const analyzeRes = await fetch(
-        "http://localhost:5000/api/reports/analyze",
+        `${import.meta.env.VITE_API_BASE_URL}/api/reports/analyze`,
         {
           method: "POST",
           headers: {

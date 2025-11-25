@@ -315,7 +315,7 @@ class ApiService {
   // RAG Chat methods
 
   async ragSendMessage(message: string, chatId?: string) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const response = await fetch(`${ragUrl}/chat`, {
@@ -339,7 +339,7 @@ class ApiService {
   }
 
   async ragGetChats() {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL";
     const response = await fetch(`${ragUrl}/chats`, {
       headers: {
         Authorization: `Bearer ${
@@ -353,7 +353,7 @@ class ApiService {
   }
 
   async ragGetMessages(chatId: string) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(`${ragUrl}/chats/${chatId}/messages`, {
       headers: {
         Authorization: `Bearer ${
@@ -370,7 +370,7 @@ class ApiService {
   // --- Added rag chat helpers ---
 
   async ragDeleteChat(chatId: string) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -389,7 +389,7 @@ class ApiService {
   }
 
   async ragRenameChat(chatId: string, newTitle: string) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -409,7 +409,7 @@ class ApiService {
   }
 
   async ragArchiveChat(chatId: string, archived = true) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}`,
       {
@@ -430,7 +430,7 @@ class ApiService {
   }
 
   async ragShareChat(chatId: string) {
-    const ragUrl = RAG_API_BASE_URL || "http://localhost:8502/api/rag";
+    const ragUrl = RAG_API_BASE_URL;
     const response = await fetch(
       `${ragUrl}/chats/${encodeURIComponent(chatId)}/share`,
       {

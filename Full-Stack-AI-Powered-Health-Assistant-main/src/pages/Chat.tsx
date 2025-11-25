@@ -36,6 +36,8 @@ function UrlInputModal({
     }
   };
 
+  const RAG_API_BASE_URL = import.meta.env.VITE_RAG_API_BASE_URL;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 animate-fade-in">
       <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full mx-4 animate-scale-in">
@@ -200,7 +202,7 @@ export default function Chat() {
               formData.append("file", file);
 
               const res = await fetch(
-                "http://localhost:8502/api/rag/ingest/pdf",
+                `${RAG_API_BASE_URL}/ingest/pdf`,
                 {
                   method: "POST",
                   headers: {
@@ -276,7 +278,7 @@ export default function Chat() {
     setUploadingUrl(true);
 
     try {
-      const res = await fetch("http://localhost:8502/api/rag/ingest/url", {
+      const res = await fetch(`${RAG_API_BASE_URL}/ingest/url`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
