@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
@@ -11,8 +11,14 @@ import { useAuth } from "@/contexts/AuthContext";
 export default function Auth() {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login, register, adminLogin } = useAuth();
+  const { login, register, adminLogin, logout, user } = useAuth();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -104,105 +110,127 @@ export default function Auth() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Logout failed",
+        description: error.message || "An error occurred while logging out.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="container py-12">
       <h1 className="text-3xl font-bold mb-6">
         Welcome to Clarity Retina Care
       </h1>
-      <Tabs defaultValue="login" className="max-w-xl">
-        <TabsList>
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          <TabsTrigger value="admin">Admin</TabsTrigger>
-        </TabsList>
+      {user ? (
+        <Button onClick={handleLogout} className="mb-4">
+          Log Out
+        </Button>
+      ) : (
+        <Tabs defaultValue="login" className="max-w-xl">
+          <TabsList>
+            <TabsTrigger value="login">Login</TabsTrigger>
+            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="admin">Admin</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="login">
-          <AuthCard
-            title="Login"
-            onSubmit={handleLogin}
-            loading={loading}
-            fields={[
-              {
-                name: "email",
-                type: "email",
-                label: "Email",
-                placeholder: "you@domain.com",
-                required: true,
-              },
-              {
-                name: "password",
-                type: "password",
-                label: "Password",
-                required: true,
-              },
-            ]}
-          />
-        </TabsContent>
+          <TabsContent value="login">
+            <AuthCard
+              title="Login"
+              onSubmit={handleLogin}
+              loading={loading}
+              fields={[
+                {
+                  name: "email",
+                  type: "email",
+                  label: "Email",
+                  placeholder: "you@domain.com",
+                  required: true,
+                },
+                {
+                  name: "password",
+                  type: "password",
+                  label: "Password",
+                  required: true,
+                },
+              ]}
+            />
+          </TabsContent>
 
-        <TabsContent value="signup">
-          <AuthCard
-            title="Create your account"
-            onSubmit={handleSignup}
-            loading={loading}
-            fields={[
-              {
-                name: "firstName",
-                type: "text",
-                label: "First Name",
-                required: true,
-              },
-              {
-                name: "lastName",
-                type: "text",
-                label: "Last Name",
-                required: true,
-              },
-              {
-                name: "email",
-                type: "email",
-                label: "Email",
-                placeholder: "you@domain.com",
-                required: true,
-              },
-              {
-                name: "phone",
-                type: "tel",
-                label: "Phone (optional)",
-                placeholder: "+1234567890",
-              },
-              {
-                name: "password",
-                type: "password",
-                label: "Password",
-                required: true,
-              },
-            ]}
-          />
-        </TabsContent>
+          <TabsContent value="signup">
+            <AuthCard
+              title="Create your account"
+              onSubmit={handleSignup}
+              loading={loading}
+              fields={[
+                {
+                  name: "firstName",
+                  type: "text",
+                  label: "First Name",
+                  required: true,
+                },
+                {
+                  name: "lastName",
+                  type: "text",
+                  label: "Last Name",
+                  required: true,
+                },
+                {
+                  name: "email",
+                  type: "email",
+                  label: "Email",
+                  placeholder: "you@domain.com",
+                  required: true,
+                },
+                {
+                  name: "phone",
+                  type: "tel",
+                  label: "Phone (optional)",
+                  placeholder: "+1234567890",
+                },
+                {
+                  name: "password",
+                  type: "password",
+                  label: "Password",
+                  required: true,
+                },
+              ]}
+            />
+          </TabsContent>
 
-        <TabsContent value="admin">
-          <AuthCard
-            title="Admin Sign In"
-            onSubmit={handleAdminLogin}
-            loading={loading}
-            fields={[
-              {
-                name: "email",
-                type: "email",
-                label: "Admin Email",
-                placeholder: "admin@clarityretina.com",
-                required: true,
-              },
-              {
-                name: "password",
-                type: "password",
-                label: "Admin Password",
-                required: true,
-              },
-            ]}
-          />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="admin">
+            <AuthCard
+              title="Admin Sign In"
+              onSubmit={handleAdminLogin}
+              loading={loading}
+              fields={[
+                {
+                  name: "email",
+                  type: "email",
+                  label: "Admin Email",
+                  placeholder: "admin@clarityretina.com",
+                  required: true,
+                },
+                {
+                  name: "password",
+                  type: "password",
+                  label: "Admin Password",
+                  required: true,
+                },
+              ]}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }
